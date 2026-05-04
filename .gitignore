@@ -1,0 +1,14 @@
+# Залежності
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Секретні дані (паролі до БД, ключі)
+.env
+server/.env
+
+# Логи та системні файли
+npm-debug.log*
+.DS_Store
+dist/
+build/

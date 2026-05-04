@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+.home-page {
+    font-family: 'Inter', sans-serif;
+}
+
+.fw-extrabold { font-weight: 800; }
+.tracking-tight { letter-spacing: -1px; }
+.tracking-widest { letter-spacing: 2px; }
+.sm { font-size: 0.8rem; }
+
+/* ефект для карток */
+.hover-card-modern { 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid transparent !important;
+}
+
+.hover-card-modern:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.1) !important; 
+}
+
+/* Кольорові акценти зверху карток */
+.context-card-blue:hover { border-top-color: #3b82f6 !important; }
+.context-card-green:hover { border-top-color: #10b981 !important; }
+.context-card-dark:hover { border-top-color: #6366f1 !important; }
+
+/* Анімації кнопок */
+.transition-all { transition: all 0.25s ease; }
+
+.hover-scale:hover {
+    transform: scale(1.03);
+}
+
+.hover-down:hover {
+    transform: translateY(3px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+}
+
+.line-height-tight {
+    line-height: 1.15;
+}
+
+/* Кастомізація Bootstrap кольорів */
+.bg-primary-subtle { background-color: #e0f2fe; }
+.text-primary { color: #3b82f6 !important; }
+.btn-primary { background-color: #3b82f6; border-color: #3b82f6; }
+.btn-primary:hover { background-color: #2563eb; border-color: #2563eb; }
+.text-success { color: #10b981 !important; }
+.bg-success { background-color: #10b981 !important; }
