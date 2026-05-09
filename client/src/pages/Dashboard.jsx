@@ -212,7 +212,7 @@ export default function Dashboard() {
                           className={`btn btn-sm rounded-pill px-3 ${activeServiceId === service.id ? 'btn-primary' : 'btn-outline-primary'}`}
                           onClick={() => filterByService(service.id)}
                         >
-                          {activeServiceId === service.id ? 'Всі заявки' : 'Тільки сюди'}
+                          {activeServiceId === service.id ? 'Всі заявки' : 'Заявки'}
                         </button>
                         <button className="btn btn-sm btn-outline-secondary rounded-pill px-3" onClick={() => setEditingService(service)}>Редагувати</button>
                       </div>
