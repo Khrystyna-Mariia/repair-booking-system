@@ -10,7 +10,7 @@ export default function AllServices() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/services', config)
+    axios.get(`${import.meta.env.VITE_API_URL}/api/services`, config)
       .then(res => setServices(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -18,7 +18,7 @@ export default function AllServices() {
   const deleteService = async (id) => {
     if (window.confirm("Видалити цю послугу?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/services/${id}`, config);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/services/${id}`, config);
         setServices(services.filter(s => s.id !== id));
       } catch (err) {
         console.error(err);

@@ -10,7 +10,7 @@ export default function AllBookings() {
 
   const fetchAllBookings = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/bookings/all', config);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/bookings/all`, config);
       setBookings(res.data);
     } catch (err) { console.error("Помилка", err); }
   };
@@ -19,7 +19,7 @@ export default function AllBookings() {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.patch(`http://localhost:5000/api/bookings/${id}/status`, { status: newStatus }, config);
+      await axios.patch(`${import.meta.env.VITE_API_URL}/api/bookings/${id}/status`, { status: newStatus }, config);
       fetchAllBookings(); // Оновлюємо дані
     } catch (err) { alert("Не вдалося змінити статус"); }
   };
@@ -27,7 +27,7 @@ export default function AllBookings() {
   const handleDelete = async (id) => {
     if (window.confirm("Видалити цей запис із бази даних?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/bookings/${id}`, config);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/bookings/${id}`, config);
         fetchAllBookings();
       } catch (err) { alert("Помилка видалення"); }
     }

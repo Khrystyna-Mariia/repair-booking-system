@@ -20,7 +20,7 @@ export default function Register() {
     
     try {
       // Відправка даних
-      await axios.post('http://localhost:5000/api/auth/register', formData);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, formData);
       
       alert("Реєстрація успішна! Тепер ви можете увійти.");
       navigate('/login'); 

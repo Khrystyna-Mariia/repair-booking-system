@@ -12,7 +12,7 @@ export default function MySensors() {
 
   const fetchSensors = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/sensors?userId=${user.id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/sensors?userId=${user.id}`);
       setSensors(res.data);
     } catch (err) {
       console.error("Помилка завантаження даних");
@@ -27,7 +27,7 @@ export default function MySensors() {
 
   const saveName = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/sensors/${id}`, { name: editName });
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/sensors/${id}`, { name: editName });
       setEditingId(null);
       fetchSensors();
     } catch (err) {
@@ -37,7 +37,7 @@ export default function MySensors() {
 
   const deleteSensor = async (id) => {
     if (window.confirm("Ви впевнені, що хочете видалити цей пристрій зі свого кабінету?")) {
-      await axios.delete(`http://localhost:5000/api/sensors/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/sensors/${id}`);
       fetchSensors();
     }
   };

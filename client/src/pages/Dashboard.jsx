@@ -41,7 +41,7 @@ export default function Dashboard() {
   const fetchMyServices = useCallback(async () => {
     if (user?.role !== 'master' || !user?.id) return;
     try {
-      const res = await axios.get(`http://localhost:5000/api/services?masterId=${user.id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/services?masterId=${user.id}`);
       setMyServices(res.data);
     } catch (err) { console.error("Помилка завантаження послуг", err); }
   }, [user]);
@@ -51,7 +51,7 @@ export default function Dashboard() {
     try {
       const role = user.role?.toLowerCase().trim(); 
       const queryParam = role === 'client' ? `clientId=${user.id}` : `masterId=${user.id}`;
-      const response = await axios.get(`http://localhost:5000/api/bookings?${queryParam}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/bookings?${queryParam}`);
       setBookings(response.data);
       setFilteredBookings(response.data); 
     } catch (error) { console.error("Помилка при завантаженні заявок", error); }
@@ -79,7 +79,7 @@ export default function Dashboard() {
       const payload = { status: newStatus };
       if (price !== null && price !== '') payload.price = parseFloat(price);
       if (masterNote && masterNote.trim() !== '') payload.masterNote = masterNote;
-      const res = await axios.patch(`http://localhost:5000/api/bookings/${id}`, payload);
+      const res = await axios.patch(`${import.meta.env.VITE_API_URL}/api/bookings/${id}`, payload);
       if (res.status === 200) {
         fetchBookings();
         if (masterNote || price) alert("Дані оновлено!");
@@ -90,7 +90,7 @@ export default function Dashboard() {
   const handleAddService = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/services', { ...newService, masterId: user.id });
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/services`, { ...newService, masterId: user.id });
       alert("Спеціалізацію додано!");
       setNewService({ title: '', category: '', description: '' });
       setShowAddForm(false); 
@@ -101,7 +101,7 @@ export default function Dashboard() {
   const handleUpdateService = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:5000/api/services/${editingService.id}`, editingService);
+      await axios.patch(`${import.meta.env.VITE_API_URL}/api/services/${editingService.id}`, editingService);
       alert("Послугу оновлено!");
       setEditingService(null);
       fetchMyServices();
@@ -111,7 +111,7 @@ export default function Dashboard() {
   const handleDeleteService = async (serviceId) => {
     if (!window.confirm("Ви впевнені?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/services/${serviceId}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/services/${serviceId}`);
       setEditingService(null);
       fetchMyServices();
     } catch (err) { alert("Помилка при видаленні."); }
@@ -122,7 +122,7 @@ export default function Dashboard() {
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:5000/api/users/${user.id}`, profileData);
+      await axios.patch(`${import.meta.env.VITE_API_URL}/api/users/${user.id}`, profileData);
       const updatedUser = { ...user, ...profileData };
       localStorage.setItem('user', JSON.stringify(updatedUser));
       setUser(updatedUser);
@@ -142,7 +142,7 @@ export default function Dashboard() {
         updateData.bookingDate = editDate;
         updateData.timeSlot = editTimeSlot;
       }
-      await axios.patch(`http://localhost:5000/api/bookings/${editingBooking.id}`, updateData);
+      await axios.patch(`${import.meta.env.VITE_API_URL}/api/bookings/${editingBooking.id}`, updateData);
       setEditingBooking(null);
       fetchBookings();
     } catch (error) { alert("Помилка при оновленні"); }
@@ -151,7 +151,7 @@ export default function Dashboard() {
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/reviews', {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/reviews`, {
         rating: reviewData.rating,
         comment: reviewData.comment,
         bookingId: selectedBooking.id,

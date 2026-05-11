@@ -30,7 +30,7 @@ export default function Services() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/services');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/services`);
         // Створюємо список унікальних категорій з усіх наявних послуг
         const uniqueCats = ['Всі', ...new Set(res.data.map(s => s.category))];
         setCategories(uniqueCats);
@@ -46,7 +46,7 @@ export default function Services() {
     const fetchServices = async () => {
       setLoading(true);
       try {
-        const res = await axios.get('http://localhost:5000/api/services', {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/services`, {
           params: {
             category: selectedCategory !== 'Всі' ? selectedCategory : undefined,
             search: searchTerm || undefined
@@ -72,7 +72,7 @@ export default function Services() {
     if (bookingId && user) {
       const fetchBooking = async () => {
         try {
-          const bookRes = await axios.get(`http://localhost:5000/api/bookings?clientId=${user.id}`);
+          const bookRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/bookings?clientId=${user.id}`);
           const existing = bookRes.data.find(b => b.id === parseInt(bookingId));
           if (existing) {
             setFormData({
@@ -93,13 +93,13 @@ export default function Services() {
     e.preventDefault();
     try {
       if (bookingId) {
-        await axios.patch(`http://localhost:5000/api/bookings/${bookingId}`, {
+        await axios.patch(`${import.meta.env.VITE_API_URL}/api/bookings/${bookingId}`, {
           ...formData,
           serviceId: selectedService.id
         });
         alert("Заявку оновлено!");
       } else {
-        await axios.post('http://localhost:5000/api/bookings', {
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/bookings`, {
           ...formData,
           serviceId: selectedService.id,
           clientId: user.id

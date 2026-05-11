@@ -13,7 +13,7 @@ export default function ServiceReviewsPage() {
   useEffect(() => {
     const fetchServiceDetails = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/services/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/services/${id}`);
         setService(res.data);
         setLoading(false);
       } catch (error) {

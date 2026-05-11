@@ -50,7 +50,7 @@ export default function BookingRow({
   const handleDeleteBooking = async (bookingId) => {
     if (window.confirm("Ви впевнені, що хочете скасувати цю заявку?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/bookings/client/${bookingId}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/bookings/client/${bookingId}`);
         if (setBookings) setBookings(prev => prev.filter(item => item.id !== bookingId));
         if (setFilteredBookings) setFilteredBookings(prev => prev.filter(item => item.id !== bookingId));
       } catch (error) {

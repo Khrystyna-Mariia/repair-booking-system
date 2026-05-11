@@ -10,7 +10,7 @@ export default function UserManagement() {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/users', config);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users`, config);
       setUsers(res.data);
     } catch (err) { 
       console.error("Помилка завантаження користувачів:", err); 
@@ -22,7 +22,7 @@ export default function UserManagement() {
   const deleteUser = async (userId) => {
     if (window.confirm("Ви точно хочете видалити цього користувача? Це також може видалити пов'язані з ним дані.")) {
       try {
-        await axios.delete(`http://localhost:5000/api/users/${userId}`, config);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/users/${userId}`, config);
         fetchUsers();
       } catch (err) {
         console.error(err);
